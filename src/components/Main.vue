@@ -175,8 +175,9 @@ export default defineComponent({
         worker.onmessage = (ev) => {
           worker.terminate();
           this.running = false;
-          this.yourWinRate = ev.data[0];
-          this.oppWinRate = ev.data[1];
+          let total = ev.data[0] + ev.data[1] + ev.data[2];
+          this.yourWinRate = ev.data[0] / total;
+          this.oppWinRate = ev.data[1] / total;
         };
         worker.postMessage(new_input);
       },
